@@ -1,7 +1,27 @@
 import Head from 'next/head';
-import styles from '../styles/Home.module.css';  // 确保导入样式
+import styles from '../styles/Home.module.css';
+import React, { useState, useEffect, useRef } from 'react';
 
 export default function Home({ dinosaurs }) {
+  const [isPlaying, setPlaying] = useState(false);
+  const audioRef = useRef(null);
+
+  useEffect(() => {
+    // 自动播放音频
+    audioRef.current.play();
+    setPlaying(true);
+  }, []);
+
+  const togglePlay = () => {
+    if (audioRef.current.paused) {
+      audioRef.current.play();
+      setPlaying(true);
+    } else {
+      audioRef.current.pause();
+      setPlaying(false);
+    }
+  };
+
   return (
     <div className={styles.container}>
       <Head>
@@ -13,6 +33,11 @@ export default function Home({ dinosaurs }) {
       <main className={styles.main}>
         <h1 className={styles.title}>欢迎来到肘子大家族！</h1>
         <p className={styles.description}>呀嘞呀嘞，不听话的肘肘</p>
+        <audio ref={audioRef} src="/song.m4a" loop />
+        <div className={styles.albumContainer}>
+        <img src="/album.jpg" className={`${styles.albumImage} ${isPlaying ? styles.rotatingAlbum : ''}`} alt="专辑封面"/>
+        <button onClick={togglePlay} className={styles.playButton}>{isPlaying ? 'Pause' : 'Play'}</button>
+        </div>
 
         <div className={styles.grid}>
           {dinosaurs.map((dino, index) => (

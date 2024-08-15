@@ -50,4 +50,47 @@
     color: var(--primary-color);
     border-color: var(--primary-color);
   }
+
+/********************************这段为专辑相关css ****************/
+  .albumImage {
+    width: 200px; /* 控制图片大小 */
+    height: 200px; /* 控制图片大小 */
+    border-radius: 50%; /* 使图片呈现圆形 */
+    object-fit: cover; /* 确保图片内容适当填充，不变形 */
+  }
   
+  .rotatingAlbum {
+    animation: spin 5s linear infinite;
+  }
+  
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .albumContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .playButton {
+    margin-left: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #0056b3;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .playButton:hover {
+    background-color: #004085;
+  }
+/********************************这段为专辑相关css ****************/
