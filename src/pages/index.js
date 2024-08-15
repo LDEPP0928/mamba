@@ -28,9 +28,16 @@ export default function Home({ dinosaurs }) {
   );
 }
 
+import { promises as fs } from 'fs';
+import path from 'path';
+
 export async function getStaticProps() {
-  const res = await fetch('http://localhost:3000/data.json');
-  const dinosaurs = await res.json();
+  // 构建文件的路径
+  const filePath = path.join(process.cwd(), 'public', 'data.json');
+  // 读取文件内容
+  const jsonData = await fs.readFile(filePath, 'utf8');
+  // 解析JSON数据
+  const dinosaurs = JSON.parse(jsonData);
 
   return {
     props: {
